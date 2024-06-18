@@ -81,6 +81,10 @@ exports.toggleBlock = async (req, res) => {
 //update a user
 exports.updateUser = async (req, res) => {
   try {
+    // Ensure email cannot be updated
+    if (req.body.email) {
+      delete req.body.email;
+    }
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });

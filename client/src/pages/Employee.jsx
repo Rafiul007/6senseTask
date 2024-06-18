@@ -207,7 +207,7 @@ const Employee = () => {
                                 { type: 'email', message: 'Please enter a valid email!' }
                             ]}
                         >
-                            <Input />
+                            <Input  />
                         </Form.Item>
                         <Form.Item
                             name="phone"
@@ -253,7 +253,7 @@ const Employee = () => {
                                 { type: 'email', message: 'Please enter a valid email!' }
                             ]}
                         >
-                            <Input />
+                            <Input disabled/>
                         </Form.Item>
                         <Form.Item
                             name="phone"
