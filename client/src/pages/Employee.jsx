@@ -50,8 +50,8 @@ const Employee = () => {
     const handleAddEmployee = async (values) => {
         try {
             const response = await axios.post(`${API_URL}${EMPLOYEE_API}`, values);
-            const newEmployee = { ...values, key: response.data.id, _id: response.data.id };
-            setEmployees([...employees, newEmployee]);
+            // Call fetchEmployees to refresh the list of employees
+            await fetchEmployees();
             setIsAddModalVisible(false);
             form.resetFields();
             message.success('Employee added successfully');
@@ -64,10 +64,8 @@ const Employee = () => {
     const handleEditEmployee = async (values) => {
         try {
             await axios.put(`${API_URL}${EMPLOYEE_API}/${selectedEmployee._id}`, values);
-            const updatedEmployees = employees.map(emp => 
-                emp._id === selectedEmployee._id ? { ...values, _id: selectedEmployee._id, key: selectedEmployee._id } : emp
-            );
-            setEmployees(updatedEmployees);
+            // Call fetchEmployees to refresh the list of employees
+            await fetchEmployees();
             setIsEditModalVisible(false);
             editForm.resetFields();
             message.success('Employee updated successfully');
@@ -80,8 +78,8 @@ const Employee = () => {
     const handleDeleteEmployee = async (id) => {
         try {
             await axios.delete(`${API_URL}${EMPLOYEE_API}/${id}`);
-            const updatedEmployees = employees.filter(emp => emp._id !== id);
-            setEmployees(updatedEmployees);
+            // Call fetchEmployees to refresh the list of employees
+            await fetchEmployees();
             message.success('Employee deleted successfully');
         } catch (error) {
             console.error('Error deleting employee:', error);
